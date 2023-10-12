@@ -12,4 +12,5 @@ const snippet = computed(() => {
 <template>
   <h2 class="text-2xl font-bold">{{ post.title }}</h2>
   <p>{{ snippet }}</p>
+  <span v-for="tag in post.tags" :key="tag">#{{ tag }} </span>
 </template>

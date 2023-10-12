@@ -1,30 +1,19 @@
 <script setup>
-import { ref, watchEffect } from 'vue';
+import { watchEffect } from 'vue';
 import PostList from '../components/PostList.vue';
+import getPosts from '../composables/getPosts'
 
-const posts = ref([])
-const error = ref(null)
+const { posts, error, load } = getPosts()
 
-const load = async () => {
-  try {
-    const response = await fetch('https://dummyjson.com/posts')
-
-    if (!response.ok) {
-      throw Error('No data available')
-    }
-    const data = await response.json()
-    posts.value = data.posts
-  } catch (error) {
-    console.log(error.message)
-  }
-}
-watchEffect(() => {
-  load()
-})
+load()
+console.log(error.value);
+// watchEffect(() => {
+//   load()
+// })
 </script>
 <template>
   <h1 class="text-4xl font-bold">Home</h1>
-  <div v-if="error">{{ error }}</div>
+  <div>{{ error }}</div>
   <div v-if="posts.length">
     <PostList :posts="posts" />
   </div>
