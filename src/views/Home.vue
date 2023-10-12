@@ -1,20 +1,20 @@
 <script setup>
-import { watchEffect } from 'vue';
+// import { watchEffect } from 'vue';
 import PostList from '../components/PostList.vue';
 import getPosts from '../composables/getPosts'
 
 const { posts, error, load } = getPosts()
 
 load()
-console.log(error.value);
+
 // watchEffect(() => {
 //   load()
 // })
 </script>
 <template>
-  <h1 class="text-4xl font-bold">Home</h1>
-  <div>{{ error }}</div>
-  <div v-if="posts.length">
+  <h1 class="text-4xl font-bold"><span class="text-primary">Vue</span>Blog</h1>
+  <div v-if="error">{{ error }}</div>
+  <div v-if="posts.length" class="py-10 xl:mx-40 2xl:mx-96">
     <PostList :posts="posts" />
   </div>
   <div v-else>Loading ...</div>

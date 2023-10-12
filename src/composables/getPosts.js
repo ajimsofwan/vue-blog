@@ -6,7 +6,7 @@ const getPosts = () => {
 
   const load = async () => {
     try {
-      const response = await fetch("https://dummyjson.com/posts");
+      const response = await fetch("https://dummyjson.com/posts?limit=10");
 
       if (!response.ok) {
         throw Error("No data available");
