@@ -9,6 +9,9 @@ export default {
         "primary-extra-light": "#5eead4",
         "primary-dark": "#0f766e",
       },
+      animation: {
+        "spin-slow": "spin 1s ease infinite",
+      },
     },
   },
   darkMode: "class",

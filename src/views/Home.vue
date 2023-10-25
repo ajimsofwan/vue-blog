@@ -1,6 +1,7 @@
 <script setup>
 // import { watchEffect } from 'vue';
 import PostList from '../components/PostList.vue';
+import Spinner from '../components/Spinner.vue';
 import getPosts from '../composables/getPosts'
 
 const { posts, error, load } = getPosts()
@@ -17,5 +18,7 @@ load()
   <div v-if="posts.length" class="py-10 xl:mx-40 2xl:mx-96">
     <PostList :posts="posts" />
   </div>
-  <div v-else>Loading ...</div>
+  <div v-else>
+    <Spinner />
+  </div>
 </template>

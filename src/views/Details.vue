@@ -1,6 +1,7 @@
 <script setup>
 import getPost from '../composables/getPost'
 import PostDetail from '../components/PostDetail.vue'
+import Spinner from '../components/Spinner.vue';
 
 const props = defineProps(['id'])
 const { post, error, load } = getPost()
@@ -13,5 +14,7 @@ load(props.id)
   <div v-if="post" class="py-10 xl:mx-40 2xl:mx-96">
     <PostDetail :post="post" />
   </div>
-  <div v-else>Loading ...</div>
+  <div v-else>
+    <Spinner />
+  </div>
 </template>
