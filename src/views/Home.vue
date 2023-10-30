@@ -13,9 +13,8 @@ load()
 // })
 </script>
 <template>
-  <h1 class="text-4xl font-bold"><span class="text-primary">Vue</span>Blog</h1>
   <div v-if="error">{{ error }}</div>
-  <div v-if="posts.length" class="py-10 xl:mx-40 2xl:mx-96">
+  <div v-if="posts.length" class="py-10">
     <PostList :posts="posts" />
   </div>
   <div v-else>
