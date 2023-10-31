@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import Details from "../views/Details.vue";
+import Tag from "../views/Tag.vue";
 import Create from "../views/Create.vue";
 import NotFound from "../views/NotFound.vue";
 
@@ -15,6 +16,11 @@ const routes = [
     name: "Details",
     component: Details,
     props: true,
+  },
+  {
+    path: "/tags/:tag",
+    name: "Tag",
+    component: Tag,
   },
   {
     path: "/create",

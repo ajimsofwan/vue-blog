@@ -25,7 +25,12 @@ const imgUri = computed(() => {
         }}
         </h2>
       </router-link>
-      <span v-for="tag in post.tags" :key="tag" class="px-1 mr-1 text-sm text-white bg-primary">{{ tag }}</span>
+
+      <span v-for="tag in post.tags" :key="tag" class="px-1 mr-1 text-sm text-white bg-primary">
+        <router-link :to="{ name: 'Tag', params: { tag: tag } }">
+          {{ tag }}
+        </router-link>
+      </span>
       <p class="font-normal text-gray-700 dark:text-gray-400">{{ snippet }}</p>
     </div>
   </div>

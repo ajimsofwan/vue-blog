@@ -1,12 +1,14 @@
 import { ref } from "vue";
 
-const getPosts = () => {
+const getPosts = (limit = 10) => {
   const posts = ref([]);
   const error = ref(null);
 
   const load = async () => {
     try {
-      const response = await fetch("https://dummyjson.com/posts?limit=10");
+      const response = await fetch(
+        "https://dummyjson.com/posts?limit=" + limit
+      );
 
       if (!response.ok) {
         throw Error("No data available");
