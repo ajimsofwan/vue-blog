@@ -1,4 +1,5 @@
 import { ref } from "vue";
+import { db } from "../firebase/config";
 
 const getPost = () => {
   const post = ref(null);
@@ -6,12 +7,12 @@ const getPost = () => {
 
   const load = async (id) => {
     try {
-      const response = await fetch("https://dummyjson.com/posts/" + id);
+      const response = await db.collection("posts").doc(id).get();
 
-      if (!response.ok) {
-        throw Error("That post does not exist");
+      if (!response.exists) {
+        throw Error("No data available");
       }
-      post.value = await response.json();
+      post.value = { ...response.data(), id: response.id };
     } catch (err) {
       error.value = err.message;
       console.log(err.message);

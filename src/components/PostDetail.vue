@@ -11,7 +11,7 @@ const imgUri = computed(() => {
   <div class="p-6 mb-3 text-left bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     <div class="py-3">
       <h2 class="mb-2 text-4xl font-bold">{{ post.title }}</h2>
-      <div class="text-sm"><span>Posted By User</span> - Reactions {{ post.reactions }}</div>
+      <div class="text-sm"><span>Posted By User</span></div>
     </div>
     <div class="w-full text-center">
       <img :src="imgUri" class="w-full" alt="thumb">

@@ -1,4 +1,5 @@
 import { ref } from "vue";
+import { db } from "../firebase/config";
 
 const getPosts = (limit = 10) => {
   const posts = ref([]);
@@ -6,15 +7,14 @@ const getPosts = (limit = 10) => {
 
   const load = async () => {
     try {
-      const response = await fetch(
-        "https://dummyjson.com/posts?limit=" + limit
-      );
+      const response = await db.collection("posts").get();
 
-      if (!response.ok) {
+      if (response.empty) {
         throw Error("No data available");
       }
-      const data = await response.json();
-      posts.value = data.posts;
+      posts.value = response.docs.map((doc) => {
+        return { ...doc.data(), id: doc.id };
+      });
     } catch (err) {
       error.value = err.message;
       console.log(err.message);
