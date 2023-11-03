@@ -1,6 +1,7 @@
 <script setup>
 import { useRoute } from 'vue-router';
 import PostList from '../components/PostList.vue';
+import TagCloud from '../components/TagCloud.vue';
 import Spinner from '../components/Spinner.vue';
 import getPosts from '../composables/getPosts'
 import { computed } from 'vue';
@@ -15,10 +16,13 @@ const postsWithTag = computed(() => {
 </script>
 
 <template>
-  <h1 class="text-2xl font-bold">Showing posts with tags: {{ route.params.tag }}</h1>
-  <div v-if="error">{{ error }}</div>
-  <div v-if="posts.length" class="py-10">
-    <PostList :posts="postsWithTag" />
+  <div v-if="posts.length" class="flex py-10">
+    <div>
+      <h1 class="py-2 text-2xl font-bold">Showing posts with tags: {{ route.params.tag }}</h1>
+      <div v-if="error">{{ error }}</div>
+      <PostList :posts="postsWithTag" />
+    </div>
+    <TagCloud :posts="posts" />
   </div>
   <div v-else>
     <Spinner />
