@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { db } from "../firebase/config";
+import { db, timestamp } from "../firebase/config";
 
 const title = ref('')
 const body = ref('')
@@ -22,6 +22,7 @@ const handleSubmit = async () => {
     title: title.value,
     body: body.value,
     tags: tags.value,
+    createdAt: timestamp()
   }
 
   try {

@@ -7,7 +7,10 @@ const getPosts = (limit = 10) => {
 
   const load = async () => {
     try {
-      const response = await db.collection("posts").get();
+      const response = await db
+        .collection("posts")
+        .orderBy("createdAt", "desc")
+        .get();
 
       if (response.empty) {
         throw Error("No data available");
