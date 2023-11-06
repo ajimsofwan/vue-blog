@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { db } from "../firebase/config";
 
 const title = ref('')
 const body = ref('')
@@ -21,18 +22,12 @@ const handleSubmit = async () => {
     title: title.value,
     body: body.value,
     tags: tags.value,
-    userId: 2,
-    reaction: 5
   }
 
   try {
-    const response = await fetch("https://dummyjson.com/posts/add", {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(post)
-    })
-    if (!response.ok) {
-      throw Error("No data available");
+    const response = await db.collection('posts').add(post)
+    if (!response.id) {
+      throw Error("Failed to add post");
     }
     router.push({ name: 'Home' })
 
