@@ -1,10 +1,18 @@
 <script setup>
 import { computed } from 'vue';
+import { db } from '../firebase/config';
+import { useRouter } from 'vue-router';
 
+const router = useRouter()
 const props = defineProps(['post'])
 const imgUri = computed(() => {
   return "https://source.unsplash.com/random/800x350/?" + props.post.title
 })
+
+const handleClick = async () => {
+  await db.collection('posts').doc(props.post.id).delete();
+  router.push({ name: 'Home' })
+}
 </script>
 
 <template>
@@ -22,5 +30,8 @@ const imgUri = computed(() => {
     <div>
       Tags: <span v-for="tag in post.tags" :key="tag" class="px-1 mr-1 text-sm text-white bg-primary">{{ tag }}</span>
     </div>
+    <button @click="handleClick"
+      class="text-white bg-primary hover:bg-primary-dark focus:ring-4 focus:outline-none focus:ring-primary-light font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center my-4">Delete
+      Post</button>
   </div>
 </template>
